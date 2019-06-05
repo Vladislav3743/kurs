@@ -14,7 +14,7 @@
 		<input type="text" id="login"><br>
 		<label>Ваш пароль</label>
 		<input type="password" id="password"><br>
-		<button id="button">Отправить</button>
+		<label id="button">ОТПРАВИТЬ</label>
 	</form>
 	<a href="/register.php">Регистрация</a>
 	<script type="text/javascript">
@@ -25,12 +25,12 @@
 					type: 'POST',
 					dataType: 'json',
 					data:{
-						command: 'login',
+						command: 'register',
 						login: $('#login').val(),
 						password: $('#password').val()
 					},
 					success: data=>{
-						window.location.replace('/main.php');
+						alert("Успешно!");
 					}
 				})
 			}else return alert("Забыли что-то ввести!");
