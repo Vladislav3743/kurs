@@ -17,10 +17,17 @@
 				}else return error("Login or password is not pass correct");
 			}else return error("Login or password is not pass correct");
 			break;
-		
-		default:
-			# code...
-			break;
+		case 'register':
+			$login = $_POST['login'];
+			$password = $_POST['password'];
+			if(!empty($login) && !empty($password)){
+				$result = mysql_query("SELECT * FROM user WHERE login='$login'", $db);
+				if(empty($result)){
+					$result = mysql_query("INSERT INTO user login, password VALUES '$login','$password'",$db);
+					header("Location: /index.php");
+					exit();
+				}else return error("Error, login bizy yet");
+			}else return error("Login or password is not pass correct");
 	}
 
 ?>
