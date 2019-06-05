@@ -32,11 +32,15 @@
 						login: $('#login').val(),
 						password: $('#password').val()
 					},
-					success: (ans)=>{
-						console.log(ans.responseText);
+					success: (data)=>{
+						if(data != "Login or password is not pass correct"){
+							window.location.href = "/index.php";
+						}
+						else alert(data);
 					},
-					error: (ans)=>{
-						console.log(ans.responseText);
+					error: (data)=>{
+						alert("Ошибка работы сервера");
+						console.log(data);
 					}
 				})
 			}else return alert("Вы не все заполнили!");

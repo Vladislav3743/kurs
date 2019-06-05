@@ -1,3 +1,7 @@
+<?php
+	session_start();
+	if(!empty($_SESSION['id'])){header("Location: /main.php"); exit();}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,12 +29,19 @@
 					type: 'POST',
 					dataType: 'json',
 					data:{
-						command: 'register',
+						command: 'login',
 						login: $('#login').val(),
 						password: $('#password').val()
 					},
 					success: data=>{
-						alert("Успешно!");
+						if(data != "Login or password is not pass correct"){
+							window.location.href = '/main.php';
+						}
+						else alert(data);						
+					},
+					error: data=>{
+						alert("Ошибка работы сервера");
+						console.log(data);
 					}
 				})
 			}else return alert("Забыли что-то ввести!");
