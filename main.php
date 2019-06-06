@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	if(empty($_SESSION['id'])){ header("Location: /index.php"); exit();}
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,7 +15,6 @@
 		<h1 style="text-align: center">Список ваших задач</h1>
 	</header>
 	<section>
-		<label><?php echo $_SESSION['id']; ?></label>
 		<div class="tasks">
 			<input type="text" id="new">
 			<label id="button">Добавить</label>
@@ -23,6 +23,9 @@
 			</ul>
 		</div>
 	</section>
+	<footer>
+		<a href="/exit.php">Выйти</a>
+	</footer>
 	<script type="text/javascript">
 		const id = <?php echo $_SESSION['id']; ?>;
 		$.ajax({
