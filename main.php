@@ -18,9 +18,7 @@
 		<div class="tasks">
 			<input type="text" id="new">
 			<label id="button">Добавить</label>
-			<ul id="tasks">
-				
-			</ul>
+			<ul id="tasks"></ul>
 		</div>
 	</section>
 	<footer>
