@@ -1,8 +1,16 @@
 <?php
 	session_start();
-
+	/**
+	Подключаем наш файл с доступом к бд
+	*/
 	include("bd.php");
 	switch ($_POST['command']) {
+		/**
+		Обрабатываем кейс логин
+		проверяем что нам прислали
+		если все хорошо то авторизуем пользователя
+		в сессию пишем его id
+		*/
 		case 'login':
 			$login = $_POST['login'];
 			$password = $_POST['password'];
@@ -16,6 +24,9 @@
 				}else exit(json_encode("Login or password is not pass correct")); 
 			}else exit(json_encode("Login or password is not pass correct"));
 		break;
+		/**
+		кейс для регистрации, проверем валидность данных и заносим изменения в бд
+		*/
 		case 'register':
 			$login = $_POST['login'];
 			$password = $_POST['password'];
@@ -29,6 +40,9 @@
 				}else exit(json_encode("Login or password is not pass correct"));
 			}else exit(json_encode("Login or password is not pass correct"));
 		break;
+		/*
+		кейс отвечает за загрузку тасков с бд текущего пользователя
+		*/
 		case 'load':
 			$id = $_POST['id'];
 			$result = mysql_query("SELECT * FROM tasks WHERE id_user='$id'", $db);
@@ -39,6 +53,9 @@
 		    }
 		    echo json_encode($r);
 		break;
+		/*
+		добавляем новый таск в бд, проверям сам такс на пустоту и ид который приписываем в id_user для навигации тасков
+		*/
 		case 'add':
 			$new = $_POST['task'];
 			$id = $_POST['id_user'];
@@ -48,6 +65,10 @@
 				exit();	
 			}else {echo $id;}
 		break;
+		/*
+		Удаляем таск по запросу пользователя
+		проверяем какой id таска тот хочет удалить
+		*/
 		case 'del':
 			$id = $_POST['id'];
 			if(!empty($id)){ $result = mysql_query("DELETE FROM tasks WHERE id='$id'", $db); echo exit(json_encode("Успешно!"));}else exit(json_encode("id tasks is not pass correct"));
